@@ -2,10 +2,17 @@
 
 <% @books.each do |book| %>
 <div>
-  <p>投稿ユーザー画像：<%= image_tag book.user.get_profile_image(100,100) %></p>
-  <p>Title：<%= book.title %></p>
+  <p><%= image_tag book.user.get_profile_image(100,100) %></p>
+  <%= link_to book_path(book.id) do %>
+  <%= book.title %>
+  <% end %>
   <p>Opinion：<%= book.body %></p>
 </div>
+<% end %>
+
+<!--　編集用のリンク。id一致しないと表示されないので注意　-->
+<% if @user == current_user %>
+<p><%= link_to "編集", edit_user_path(@user.id) %></p>
 <% end %>
 
 <!--　新規投稿フォーム　-->
@@ -17,3 +24,4 @@
       <%= f.text_area :body %>
     <%= f.submit 'Create Book' %>
   <% end %>
+

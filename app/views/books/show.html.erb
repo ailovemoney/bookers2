@@ -1,1 +1,17 @@
-<h2>Books</h2>
+<h2>Book detail</h2>
+<p><%= image_tag @book.user.get_profile_image(100,100) %></p>
+<%= link_to user_path(@user.id) do %>
+    <%= @book.user.name %>
+    <% end %>
+<p><%= link_to book_path(@book.id) do %>
+    <%= @book.title %>
+    <% end %></p>
+<p><%= @book.body %></p>
+
+
+<!--削除と編集リンク-->
+<div><% if @book.user == current_user %>
+<%= link_to "編集", edit_book_path(@book.id) %>
+<%= link_to "削除", book_path(@book), method: :delete %>
+<% end %>
+</div>
