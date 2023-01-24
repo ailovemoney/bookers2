@@ -4,3 +4,14 @@
 <p><%= user.name %></p>
 <%= link_to 'Show', user_path(user.id) %>
 <% end %>
+
+<!--プロフィール-->
+<h1>User info</h1>
+<p><%= image_tag current_user.get_profile_image(100,100) %></p>
+<p>name <%= current_user.name %></p>
+<p>introduction <%= current_user.introduction %></p>
+
+<!--プロフィール編集-->
+<p><%= link_to "編集", edit_user_path(current_user.id) %></p>
+
+<%= render 'books/list', book: @book %>

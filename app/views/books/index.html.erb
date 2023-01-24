@@ -1,3 +1,12 @@
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>error prohibited this obj from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h2>Books</h2>
 
 <% @books.each do |book| %>
@@ -10,18 +19,14 @@
 </div>
 <% end %>
 
-<!--　編集用のリンク。id一致しないと表示されないので注意　-->
-<% if @user == current_user %>
-<p><%= link_to "編集", edit_user_path(@user.id) %></p>
-<% end %>
+<!--プロフィール-->
+<h1>User info</h1>
+<p><%= image_tag current_user.get_profile_image(100,100) %></p>
+<p>name <%= current_user.name %></p>
+<p>introduction <%= current_user.introduction %></p>
 
-<!--　新規投稿フォーム　-->
-<h1>New book</h1>
-  <%= form_with model: @book do |f| %>
-    <h4>Title</h4>
-      <%= f.text_field :title %>
-    <h4>Opinion</h4>
-      <%= f.text_area :body %>
-    <%= f.submit 'Create Book' %>
-  <% end %>
+<!--プロフィール編集-->
+<p><%= link_to "編集", edit_user_path(current_user.id) %></p>
+
+<%= render 'list', book: @book %>
 

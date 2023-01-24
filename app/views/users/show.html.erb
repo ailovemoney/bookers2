@@ -1,16 +1,23 @@
-<div>
-  <h2>User info</h2>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <h4>name <%= @user.name %></h4>
-  <h4>introduction <%= @user.introduction %></h4>
-</div>
+<%= notice %>
+
+<h2>Books</h2>
 
 <!-- ユーザーの投稿一覧 -->
-
-<% @book.each do |book| %>
+<% @bookers.each do |book| %>
 <div>
   <p><%= image_tag @user.get_profile_image(100,100) %></p>
   <p>Title：<%= link_to book_path(@books.id) do %><%= book.title %><% end %></p>
   <p>Opinion：<%= book.body %></p>
 </div>
 <% end %>
+
+<!--プロフィール-->
+<h1>User info</h1>
+<p><%= image_tag @user.get_profile_image(100,100) %></p>
+<p>name <%= @user.name %></p>
+<p>introduction <%= @user.introduction %></p>
+
+<!--プロフィール編集-->
+<p><%= link_to "編集", edit_user_path(current_user.id) %></p>
+
+<%= render 'books/list', book: @book %>

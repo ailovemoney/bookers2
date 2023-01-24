@@ -1,17 +1,30 @@
+<%= notice %>
+
 <h2>Book detail</h2>
-<p><%= image_tag @book.user.get_profile_image(100,100) %></p>
-<%= link_to user_path(@user.id) do %>
-    <%= @book.user.name %>
+<p><%= image_tag @books.user.get_profile_image(100,100) %></p>
+<%= link_to user_path(@books.user.id) do %>
+    <%= @books.user.name %>
     <% end %>
-<p><%= link_to book_path(@book.id) do %>
-    <%= @book.title %>
+<p><%= link_to book_path(@books.id) do %>
+    <%= @books.title %>
     <% end %></p>
-<p><%= @book.body %></p>
+<p><%= @books.body %></p>
 
 
 <!--削除と編集リンク-->
-<div><% if @book.user == current_user %>
-<%= link_to "編集", edit_book_path(@book.id) %>
-<%= link_to "削除", book_path(@book), method: :delete %>
+<div><% if @books.user == current_user %>
+<%= link_to "編集", edit_book_path(@books.id) %>
+<%= link_to "削除", book_path(@books), method: :delete %>
 <% end %>
 </div>
+
+<!--プロフィール-->
+<h1>User info</h1>
+<p><%= image_tag @books.user.get_profile_image(100,100) %></p>
+<p>name <%= @books.user.name %></p>
+<p>introduction <%= @books.user.introduction %></p>
+
+<!--プロフィール編集-->
+<p><%= link_to "編集", edit_user_path(current_user.id) %></p>
+
+<%= render 'list', book: @book %>
