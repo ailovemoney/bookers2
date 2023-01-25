@@ -1,30 +1,59 @@
 <%= notice %>
 
-<h2>Book detail</h2>
-<p><%= image_tag @books.user.get_profile_image(100,100) %></p>
-<%= link_to user_path(@books.user.id) do %>
-    <%= @books.user.name %>
-    <% end %>
-<p><%= link_to book_path(@books.id) do %>
-    <%= @books.title %>
-    <% end %></p>
-<p><%= @books.body %></p>
+<div class="container px-5 px-sm-0">
+    <div class="row">
 
+        <div class="col-md-3">
+            <!--プロフィール-->
+            <h1>User info</h1>
+                <%= image_tag @books.user.get_profile_image(100,100) %>
+                <table class="table">
+                    <tr>
+                        <th>name</th>
+                        <td><%= @books.user.name %></td>
+                    </tr>
+                    <tr>
+                        <th>introduction</th>
+                        <td><%= @books.user.introduction %></td>
+                    </tr>
+                </table>
 
-<!--削除と編集リンク-->
-<div><% if @books.user == current_user %>
-<%= link_to "編集", edit_book_path(@books.id) %>
-<%= link_to "削除", book_path(@books), method: :delete %>
-<% end %>
+            <!--部分テンプレート-->
+            <%= render 'list', book: @book, user: @books.user %>
+        </div>
+
+        <div class="col-md-8 offset-md-1">
+        <h2>Book detail</h2>
+
+        <table class="table">
+            <tr>
+                <td>
+                    <p><%= image_tag @books.user.get_profile_image(100,100) %></p>
+                    <%= link_to user_path(@books.user.id) do %>
+                    <%= @books.user.name %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= link_to book_path(@books.id) do %>
+                    <%= @books.title %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= @books.body %>
+                </td>
+                <td>
+                    <% if @books.user == current_user %>
+                    <%= link_to "edit", edit_book_path(@books.id), class: 'btn btn-success' %>
+                    <% end %>
+                </td>
+                <td>
+                    <% if @books.user == current_user %>
+                    <%= link_to "Destroy", book_path(@books), method: :delete, class: "btn btn-danger" %>
+                    <% end %>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    </div>
 </div>
-
-<!--プロフィール-->
-<h1>User info</h1>
-<p><%= image_tag @books.user.get_profile_image(100,100) %></p>
-<p>name <%= @books.user.name %></p>
-<p>introduction <%= @books.user.introduction %></p>
-
-<!--プロフィール編集-->
-<p><%= link_to "編集", edit_user_path(current_user.id) %></p>
-
-<%= render 'list', book: @book %>
