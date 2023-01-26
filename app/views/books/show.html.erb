@@ -42,18 +42,16 @@
                     <%= @books.body %>
                 </td>
                 <td>
-                    <% if @books.user == current_user %>
-                    <%= link_to "edit", edit_book_path(@books.id), class: 'btn btn-success' %>
-                    <% end %>
+                    <% if @books.user.id == current_user.id %>
+                        <%= link_to "Edit", edit_book_path(@books.id), class: 'btn btn-success' %>
                 </td>
                 <td>
-                    <% if @books.user == current_user %>
-                    <%= link_to "Destroy", book_path(@books), method: :delete, class: "btn btn-danger" %>
+                        <%= link_to "Destroy", book_path(@books), method: :delete, class: "btn btn-danger" %>
                     <% end %>
                 </td>
             </tr>
         </table>
 
-    </div>
+    </div>  
     </div>
 </div>
